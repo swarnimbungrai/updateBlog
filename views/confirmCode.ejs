@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>confirm</title>
+    <style>
+          .container{
+      height: 100vh;
+      width: 100%;
+      background-color: #1d2f3c;
+      display: flex;
+      justify-content: center;
+    }
+          .lolo{
+          width: 250px;
+          margin-left: 120px;
+          margin-top: 90px;
+          position: relative; 
+          
+          padding-left: 15px;
+          background-color: rgb(255, 255, 255);
+          height: 300px;
+        }
+         .email{
+          border:0; padding:7px 0; border-bottom:1px solid; size: 100;
+        } 
+    </style>
+
+</head>
+<body>
+    <%- include('home.ejs')%>
+  <form action="confirm" method="post" >
+    <div class="container">
+        <div class = "lolo">
+            
+        <h3>Enter the confirmation code</h3>
+        <input type="text" class="email" name="otp" placeholder="Code" size="30">
+
+        <h3>Enter the new password</h3>
+        <input type="password" class="password" name="userPassword" placeholder=" new password" size="30">
+        <br><br>
+        <button class="btn"> Update</button>
+        </div>
+        </div>
+        </form>
+</body>
+</html>

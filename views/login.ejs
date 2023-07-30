@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+      height: 100vh;
+      width: 100%;
+      background-color: #1d2f3c;
+      display: flex;
+      justify-content: center;
+    }
+          .lolo{
+          width: 250px;
+          margin-left: 120px;
+          margin-top: 20px;
+          position: relative; 
+          padding-left: 15px;
+          background-color: rgb(255, 255, 255);
+          height: 300px;
+        }
+         .email, .password{
+          border:0; padding:7px 0; border-bottom:1px solid; size: 100;
+        } 
+  
+        .button2{
+          background-color: black;
+          color:aliceblue;
+          text-align: center;
+          height: 30px;
+          margin-left: 0px;
+          border-radius: 5px;
+          padding: 10px 30px;
+          width: 94%;
+       }
+
+       .lo{
+      background-color: black;
+      color:aliceblue;
+     }
+     
+       </style>
+</head>
+<body>
+    <%- include('home.ejs')%>
+  <form action = "/login" method="post">
+    <div class="container">
+        <div class = "lolo">
+        <h2>Log In</h2>
+        <input type="text" class="email" name="userEmail" placeholder="Email" size="30">
+        <br><br>
+        <input type="text" class="password" name="userPassword" placeholder="Password" size="30">
+        <br><br>
+        <button  class="button2">Sign In</button>
+        <br><br>
+        <a href="forgotPsw" style="color:rgb(85, 84, 84)">Forgot Pass?</a>
+        <br><br>
+        <div class="form-link">
+        <span>Don't have an account ? <a class= "lo" href="register" class="button1">Sign Up</a></span>
+    </div>
+ </div>
+    </div>
+     
+  </form>
+  <%- include('footer.ejs')%>
+</body>
+</html>
