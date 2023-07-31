@@ -3,69 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
     <style>
-        .container{
-      height: 100vh;
-      width: 100%;
-      background-color: #1d2f3c;
-      display: flex;
-      justify-content: center;
-    }
-          .lolo{
-          width: 250px;
-          margin-left: 120px;
-          margin-top: 20px;
-          position: relative; 
-          padding-left: 15px;
-          background-color: rgb(255, 255, 255);
-          height: 300px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
         }
-         .email, .password{
-          border:0; padding:7px 0; border-bottom:1px solid; size: 100;
-        } 
-  
-        .button2{
-          background-color: black;
-          color:aliceblue;
-          text-align: center;
-          height: 30px;
-          margin-left: 0px;
-          border-radius: 5px;
-          padding: 10px 30px;
-          width: 94%;
-       }
 
-       .lo{
-      background-color: black;
-      color:aliceblue;
-     }
-     
-       </style>
+        .container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-form {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-form input {
+            width: 93%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-form button {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .form-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <%- include('home.ejs')%>
-  <form action = "/login" method="post">
+  <%- include('home.ejs')%>
     <div class="container">
-        <div class = "lolo">
-        <h2>Log In</h2>
-        <input type="text" class="email" name="userEmail" placeholder="Email" size="30">
-        <br><br>
-        <input type="text" class="password" name="userPassword" placeholder="Password" size="30">
-        <br><br>
-        <button  class="button2">Sign In</button>
-        <br><br>
-        <a href="forgotPsw" style="color:rgb(85, 84, 84)">Forgot Pass?</a>
-        <br><br>
+        <form class="login-form" action="/login" method="post">
+            <h2>Log In</h2>
+            <input type="email" class="email" name="userEmail" placeholder="Email" required>
+            <input type="password" class="password" name="userPassword" placeholder="Password" required>
+            <button type="submit">Sign In</button>
+        
         <div class="form-link">
-        <span>Don't have an account ? <a class= "lo" href="register" class="button1">Sign Up</a></span>
+            <span>Don't have an account? <a href="register">Sign Up</a></span>
+        </div>
+      </form>
     </div>
- </div>
-    </div>
-     
-  </form>
-  <%- include('footer.ejs')%>
+    <%- include('footer.ejs')%>
 </body>
 </html>

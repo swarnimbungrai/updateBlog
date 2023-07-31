@@ -9,6 +9,9 @@ const {sequelize, blogTB} = require ('./model')
 const bcrypt = require("bcrypt");
 const { registerBlog, loginBlog, forgotPassword, otpConfirm } = require('./controller/authController');
 
+
+
+
 //shows data in terminal which were filled in form
 app.use(express.json())
 app.use(express.urlencoded ({extended:true}))

@@ -4,92 +4,92 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=>, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registration Form</title>
     <style>
-      .container{
-    height: 100vh;
-    width: 100%;
-    background-color: #1d2f3c;
-    display: flex;
-   
-    justify-content: center;
-  }
-        .lolo{
-        width: 250px;
-        margin-left: 120px;
-        margin-top: 20px;
-        position: relative; 
-        padding-left: 15px;
-        background-color: rgb(255, 255, 255);
-        height: 350px;
-      }
-      .registerName, .registerEmail, .regPassword{
-        border:0; padding:7px 0; border-bottom:1px solid; size: 100;
-      } 
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
-      .button1{
-        background-color: black;
-        color:aliceblue;
-        text-align: center;
-        height: 30px;
-        margin-left: 0px;
-        border-radius: 5px;
-        padding: 10px 30px;
-        width: 94%;
-     }
-     .lo{
-      background-color: black;
-      color:aliceblue;
-     }
+        .container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
 
-     body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+        .registration-form {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
-.content {
-    padding: 40px;
-    text-align: center;
-}
+        .registration-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-footer {
-    background-color: #1d2f3c;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
+        .registration-form input {
+            width: 93%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-   
+        .registration-form button {
+            background-color: #3a74b3;
+            color: #fff;
+            text-align: center;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .registration-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .form-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form-link a:hover {
+            text-decoration: underline;
+        }
 
     </style>
 </head>
 <body>
   <%- include('home.ejs')%>
-  <form action = "/register" method="post">
-    <div class="container">
-    <div class = "lolo">
-    <h2>Register</h2>
-    <input type="text" class="registerName" name="userName" placeholder="Name" size="30">
-    <br><br>
-    <input type="text" class="registerEmail" name="userEmail" placeholder="Email" size="30">
-    <br><br>
-    <input type="text" class="regPassword" name="userPassword" placeholder="Password" size="30">
-    <br><br>
-   
-    <button class="button1">Sign Up</button>
-    </form>
-    <br><br>
+  <div class="container">
+    <form class="registration-form" action="/register" method="post">
+        <h2>Register</h2>
+        <input type="text" class="registerName" name="userName" placeholder="Name" required>
+        <input type="email" class="registerEmail" name="userEmail" placeholder="Email" required>
+        <input type="password" class="regPassword" name="userPassword" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+    
     <div class="form-link">
-      <span>Already have an account ? <a class="lo" href="login" class="button2">Login</a></span>
+        <span>Already have an account? <a href="login">Login</a></span>
     </div>
-  </div>
-
-  
+  </form>
 </div>
 <%- include('footer.ejs')%>
-
-
-
 </body>
 </html>

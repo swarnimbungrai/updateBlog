@@ -4,19 +4,29 @@ const sendEmail = require("../services/sendEmail");
 const userModel = require("../model/userModel");
 
 exports.registerBlog = async (req, res) => {
-    const { userName, userEmail, userPassword } = req.body
+    const { userName, userEmail, userPassword } = req.body;
+    const emailExist = await users.findAll({
+        where: {
+            userEmail: userEmail,
+        }
+    });
+    console.log(emailExist)
+    if (emailExist.length !== 0){
+        res.render('error.ejs');
+    } else{
     await users.create({
         userName,
         userEmail,
         userPassword: bcrypt.hashSync(userPassword, 10) //day4 hashing psw
+    });
 
-    })
     console.log(userName, userEmail, userPassword)
     //register vayesi without loading login page ma gako
     res.redirect('/login')
-}
+}}
 
 exports.loginBlog = async (req, res) => {
+    const jwt = require("jsonwebtoken");
     const { userEmail, userPassword } = req.body
     const blogExist = await users.findAll({ //checking data if it is available or not in DB
         where: {
@@ -30,6 +40,9 @@ exports.loginBlog = async (req, res) => {
     } else {
         const isPasswordCorrect = await bcrypt.compare(userPassword, blogExist[0].userPassword)
         if (isPasswordCorrect) {
+           const token = jwt.sign({id:blogExist[0].id},"hello") //jwt encryption
+           res.cookie ('toke', token)
+            console.log(token)
             res.redirect('/home')
         }
         else {
