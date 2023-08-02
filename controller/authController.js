@@ -1,4 +1,4 @@
-const { users } = require("../model");
+const { users , blog} = require("../model");
 const bcrypt = require("bcrypt");
 const sendEmail = require("../services/sendEmail");
 const userModel = require("../model/userModel");
@@ -12,7 +12,8 @@ exports.registerBlog = async (req, res) => {
     });
     console.log(emailExist)
     if (emailExist.length !== 0){
-        res.render('error.ejs');
+        res.render('error2.ejs');
+       
     } else{
     await users.create({
         userName,
@@ -40,10 +41,10 @@ exports.loginBlog = async (req, res) => {
     } else {
         const isPasswordCorrect = await bcrypt.compare(userPassword, blogExist[0].userPassword)
         if (isPasswordCorrect) {
-           const token = jwt.sign({id:blogExist[0].id},"hello") //jwt encryption
+           const token = jwt.sign({id:blogExist[0].id},"hello") //jwt payload, jwt encryption
            res.cookie ('toke', token)
             console.log(token)
-            res.redirect('/home')
+            res.redirect('/blog')
         }
         else {
             res.redirect('/login')
@@ -96,3 +97,16 @@ exports.otpConfirm = async (req, res) => {
    
     console.log(otpExist)
 }
+
+exports.blogAdd= async (req, res) => {
+    const {title,description, image} = req.body
+    console.log(req.body)
+    await blog.create({
+      title:title, 
+      description: description,
+    image: null,
+})
+ console.log(title, description, image )
+ res.redirect('home')
+}
+

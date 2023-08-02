@@ -7,7 +7,7 @@ app.set("view engine", "ejs")
 const {sequelize, blogTB} = require ('./model')
 
 const bcrypt = require("bcrypt");
-const { registerBlog, loginBlog, forgotPassword, otpConfirm } = require('./controller/authController');
+const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd } = require('./controller/authController');
 
 
 
@@ -20,11 +20,11 @@ app.get('/home',(req, res) => {
     res.render('home')
 });
 
-app.get('/register',(req, res) => {
+app.get('/register',(req, res) => { //hernulai UI
    
     res.render('register.ejs');
  });
- app.post('/register', registerBlog);
+ app.post('/register', registerBlog); //database ma halnu action ma post
  
 
  app.get('/login',(req, res) => {
@@ -50,7 +50,10 @@ app.get('/register',(req, res) => {
 });
 app.post('/confirm',otpConfirm)
 
-
+app.get('/blog',(req,res) => {
+   res.render('blog.ejs')
+})
+app.post('/blog',blogAdd)
 
 
 app.listen(4000,()=>{
