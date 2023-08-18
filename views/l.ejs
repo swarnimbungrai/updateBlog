@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .container{
+    /* height: 100vh;
+    width: 100%; */
+    background-color: #1d2f3c;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding:20px;
+    
+  }
+        .lolo{
+        width: 200px;
+        margin-left: 20px;
+        margin-top: 30px;
+        position: relative; 
+        padding-left: 15px;
+        background-color: rgb(255, 255, 255);
+        height: 220px;
+        border-radius: 10px;
+      }
+
+      .h3{
+        color:rgb(116, 116, 116);
+      }
+      
+      .lo{
+       
+        margin-left: 580px;
+        color: white;
+      }
+
+      .nav {   
+        background-color: #171717;
+        height:80px;
+      }
+      .division img {
+        height: 175px;
+        width: 175px;
+        margin-bottom: 10px;
+      }
+
+      
+
+    </style>
+</head>
+<body>
+  <nav class="nav">
+    <h1>
+      <a class ="lo" href="blog">Add More</a>
+    </h1>
+      </nav>
+    <ul>
+    <div class="container">
+      
+      
+    <% blogss.forEach((titl) => {%>
+    <div class = "lolo">
+        <img src = "<%- titl.image %>" alt="BlogApp">
+    <h2>
+   <%- titl.title %>
+    </h2> 
+    <p>
+        <%- titl.description %>
+    </p>
+
+   
+    
+</div>
+
+   <%}) %> 
+</ul>
+
+</body>
+
+</html> 

@@ -4,19 +4,23 @@ const app = express();
 const ejs = require ("ejs");
 app.set("view engine", "ejs") 
     
-const {sequelize, blogTB} = require ('./model')
+const {sequelize, blogTB, blog} = require ('./model')
 
 const bcrypt = require("bcrypt");
-const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd } = require('./controller/authController');
+const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd, blogS } = require('./controller/authController');
 
 //multer, package junle image/file upload grnu dinxa
 const { multer, storage } = require("././service/multerConfig");
+const { isAuthenticated } = require('./services/isAuthenticated');
 const upload = multer({ storage: storage });
 
 
 //shows data in terminal which were filled in form
 app.use(express.json())
 app.use(express.urlencoded ({extended:true}))
+app.use(require("cookie-parser")());
+
+app.use(express.static("uploads")); //database ko null ko thauma image ko link show grxa
 
 app.get('/home',(req, res) => {
     res.render('home')
@@ -55,8 +59,15 @@ app.post('/confirm',otpConfirm)
 app.get('/blog',(req,res) => {
    res.render('blog.ejs')
 })
-                 //middleware of multer
-app.post('/blog', upload.single('image'), blogAdd)
+            //middleware of multer
+app.post('/blog',isAuthenticated, upload.single('image'), blogAdd)
+// app.post('/blog', upload.single('image'), blogAdd)
+
+
+app.get('/allBlog', async (req,res) => {
+   const blogss = await blog.findAll()
+   res.render('allBlog',{blogss});
+});
 
 
 app.listen(4000,()=>{

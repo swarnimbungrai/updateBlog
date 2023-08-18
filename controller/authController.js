@@ -41,7 +41,7 @@ exports.loginBlog = async (req, res) => {
     } else {
         const isPasswordCorrect = await bcrypt.compare(userPassword, blogExist[0].userPassword)
         if (isPasswordCorrect) {
-           const token = jwt.sign({id:blogExist[0].id},"hello") //jwt payload, jwt encryption
+           const token = jwt.sign({id:blogExist[0].id},"hello") //jwt payload, jwt encryption, hello is token which is used in isAuthenticated
            res.cookie ('toke', token)
             console.log(token)
             res.redirect('/blog')
@@ -75,7 +75,7 @@ exports.forgotPassword = async (req, res) => {
         })
         console.log('User ');
 
-        res.render('confirmCode')
+        res.redirect('/confirm')
     }
 } 
 
@@ -92,7 +92,7 @@ exports.otpConfirm = async (req, res) => {
     } else {
         otpExist[0].userPassword = bcrypt.hashSync(userPassword,8)
         await otpExist[0].save()
-        res.redirect('/login')
+        res.redirect('/blog')
     }
    
     console.log(otpExist)
@@ -104,9 +104,12 @@ exports.blogAdd= async (req, res) => {
     await blog.create({
       title:title, 
       description: description,
-    image: null,
+    image: "http://localhost:4000/"+req.file.filename, //database ma image haleko ani link copy grexi browserma image dekhauxa
+        userId: req.userId,
 })
  console.log(title, description, image )
- res.redirect('home')
+ res.redirect('/allBlog')
 }
+
+
 
