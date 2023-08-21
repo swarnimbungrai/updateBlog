@@ -111,5 +111,24 @@ exports.blogAdd= async (req, res) => {
  res.redirect('/allBlog')
 }
 
+exports.blogAll= async (req,res) => {
+    const blogss = await blog.findAll({
+      include: users //user table ko name ko value UIU ma dekhaunu
+    })
+    res.render('allBlog',{blogss});   
+ }
+
+exports.single= async(req,res) => {
+    const blogS = await blog.findAll(
+       {where:{
+          id: req.params.id
+       }, include: users
+    }, 
+    );
+    console.log(blogS)
+    res.render('singleBlog', {blogS});
+ }
+
+
 
 

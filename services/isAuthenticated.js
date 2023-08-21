@@ -1,4 +1,4 @@
-const { Users, combineUser, users } = require("../model");
+const { users } = require("../model");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 
@@ -9,7 +9,7 @@ exports.isAuthenticated = async (req, res, next) => {
   if (!token) {
     return res.send({
       status: 401,
-      message: "You must be logged in", //when opened from other than browser
+      message: "You must be logged in", //when opened from other than browser and adding blog without logging in
     });
   }
 

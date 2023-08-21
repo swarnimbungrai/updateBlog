@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog Posting UI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      padding: 15px;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+    }
+
+   
+    
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .blog-post-card {
+      width: calc(25% - 20px);
+      margin: 10px;
+      padding: 20px;
+      background-color: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+      min-width: 250px;
+    }
+    
+    .blog-post-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .post-image {
+      height: 175px;
+      width: 175px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+    }
+    
+    .post-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .post-description {
+      font-size: 16px;
+      line-height: 1.4;
+      color: #666;
+    }
+    
+    .action-link {
+      display: block;
+      margin-top: 15px;
+      color: #00a0e9;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+ 
+  <div class="container">
+    <div class="blog-post-card">
+      <img class="post-image" src="<%- blogS[0].image %>" alt="BlogApp">
+      <h3 class="post-title">Created by: <%- blogS[0].title %></h3>
+      <p class="post-description"><%- blogS[0].description %></p>
+      <a href="/update/<%- blogS[0].id%>" class="action-link">Edit</a>
+      <a href="/delete/<%- blogS[0].id%>" class="action-link">Delete</a>
+    </div>
+    <!-- Add more blog post cards here -->
+  </div>
+  <footer>
+    <% include('footer.ejs')%>
+  </footer>
+</body>
+</html>

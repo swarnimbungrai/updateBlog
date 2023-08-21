@@ -34,6 +34,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      min-width: 250px;
     }
     
     .division:hover {
@@ -65,8 +66,10 @@
     }
     .lo{
        
-       margin-left: 580px;
+       margin-left: auto;
        color: white;
+       padding: 10px 20px;
+
      }
     .nav {   
         background-color: #171717;
@@ -85,8 +88,13 @@
         <div class="division">
           <h1> <%- titl.id %></h3>
           <img src="<%- titl.image %>" alt="BlogApp">
+          <h3>Created by : <%- titl.user.userName %></h3>
           <h3><%- titl.title %></h3>
           <p><%- titl.description %></p>
+          <button>
+            <!-- title page ko title id show greko  -->
+          <a href="/singleBlog/<%- titl.id %>">See More</a>  
+          </button>
     </div>
     <% }) %>
   </div>
