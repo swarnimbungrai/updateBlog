@@ -73,9 +73,10 @@
   <div class="container">
     <div class="blog-post-card">
       <img class="post-image" src="<%- blogS[0].image %>" alt="BlogApp">
-      <h3 class="post-title">Created by: <%- blogS[0].title %></h3>
+      <h3>Created by : <%- blogS[0].user.userName %></h3>
+      <h3 class="post-title"> <%- blogS[0].title %></h3>
       <p class="post-description"><%- blogS[0].description %></p>
-      <a href="/update/<%- blogS[0].id%>" class="action-link">Edit</a>
+      <a href="/edit/<%- blogS[0].id%>" class="action-link">Edit</a>
       <a href="/delete/<%- blogS[0].id%>" class="action-link">Delete</a>
     </div>
     <!-- Add more blog post cards here -->

@@ -7,7 +7,7 @@ app.set("view engine", "ejs")
 const {sequelize, blogTB, blog, users} = require ('./model')
 
 const bcrypt = require("bcrypt");
-const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd, blogS, blogAll, single } = require('./controller/authController');
+const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd, blogS, blogAll, single, deleteBlog, editBlog, updateBlog } = require('./controller/authController');
 
 //multer, package junle image/file upload grnu dinxa
 const { multer, storage } = require("././service/multerConfig");
@@ -69,25 +69,11 @@ app.get('/allBlog', blogAll);
 
 app.get('/singleBlog/:id', single);
 
-// app.get('/update/:id', async(req,res) => {
-      
-//    const edit1 = await blog.findAll({
-//       where:{
-//          id: req.params.id
-//       } 
-//    });
-//    console.log(edit1)
-//    res.render('update',{edit1})
-// });
+app.get('/delete/:id', deleteBlog);
 
-// app.post('/update/:id', async(req,res) => {
-//    const update1 = await blogs.update(req.body,{
-//       where:{
-//          id:req.params.id
-//       }
-//    })
-//    res.redirect('/title/' + req.params.id)
-// });
+app.get('/edit/:id', editBlog);
+
+app.post('/edit/:id', updateBlog);
 
 app.listen(4000,()=>{
     console.log("server started at ports 4000")
