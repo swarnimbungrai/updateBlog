@@ -7,7 +7,7 @@ app.set("view engine", "ejs")
 const {sequelize, blogTB, blog, users} = require ('./model')
 
 const bcrypt = require("bcrypt");
-const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd, blogS, blogAll, single, deleteBlog, editBlog, updateBlog } = require('./controller/authController');
+const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd, blogS, blogAll, single, deleteBlog, editBlog, updateBlog, myBlog } = require('./controller/authController');
 
 //multer, package junle image/file upload grnu dinxa
 const { multer, storage } = require("././service/multerConfig");
@@ -73,7 +73,10 @@ app.get('/delete/:id', deleteBlog);
 
 app.get('/edit/:id', editBlog);
 
-app.post('/edit/:id', updateBlog);
+app.post('/edit/:id', upload.single('image'), updateBlog);
+
+app.get('/myBlogs',isAuthentic, myBlog);
+
 
 app.listen(4000,()=>{
     console.log("server started at ports 4000")

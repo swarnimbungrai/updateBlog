@@ -51,13 +51,8 @@
             color: #292828;
         }
 
-        /* New styles for logout button */
-        .logout {
-            margin-left: auto;
-        }
-
-        /* Style for the logout link */
-        .logout a {
+        /* New styles for buttons */
+        .button {
             background-color: transparent;
             border: 1px solid #fff;
             border-radius: 10px;
@@ -65,9 +60,10 @@
             color: #fff;
             padding: 10px 20px;
             text-decoration: none;
+            cursor: pointer;
         }
 
-        .logout a:hover {
+        .button:hover {
             background-color: #a1bd6c;
             color: #292828;
         }
@@ -77,11 +73,9 @@
     <nav>
         <a href="#" class="logo">YourLogo</a>
         <ul>
-            <li><a href="blog">Blog</a></li>
-            <li><a href="register">Sign Up</a></li>
-            <li><a href="login">Sign In</a></li>
-            <!-- New logout button -->
-            <li class="logout"><a href="logout">Logout</a></li>
+            <!-- New buttons -->
+            <li><a href="login" class="button">Log Out</a></li>
+            <li><a href="blog" class="button">Add More</a></li>
         </ul>
     </nav>
 </body>

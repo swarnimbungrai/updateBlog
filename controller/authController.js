@@ -151,12 +151,27 @@ exports.editBlog= async(req,res) => {
  }
 
 exports.updateBlog= async(req,res) => {
-    const update1 = await blog.update(req.body,{
+    const update1 = await blog.update({
+        title:req.body.title,
+        description: req.body.description,
+        image: "http://localhost:4000/"+req.file.filename,
+    },{
        where:{
           id:req.params.id
        }
     })
     res.redirect('/singleBlog/' + req.params.id)
+ }
+
+ exports.myBlog= async (req,res) => {
+    console.log(req.userId)
+    const blogss = await blog.findAll({
+        where:{
+            userId: req.userId
+        },
+      include: users //user table ko name ko value UIU ma dekhaunu
+    })
+    res.render('myBlogs',{blogss});   
  }
 
 
