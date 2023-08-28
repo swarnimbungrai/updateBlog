@@ -75,7 +75,12 @@ app.get('/edit/:id', editBlog);
 
 app.post('/edit/:id', upload.single('image'), updateBlog);
 
-app.get('/myBlogs',isAuthentic, myBlog);
+app.get('/myBlogs',isAuthenticated, myBlog);
+
+app.get('/logout',(req,res) => {
+   res.clearCookie()
+   res.redirect('/login')
+})
 
 
 app.listen(4000,()=>{

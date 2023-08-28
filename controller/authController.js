@@ -151,10 +151,19 @@ exports.editBlog= async(req,res) => {
  }
 
 exports.updateBlog= async(req,res) => {
+    let file;
+    const blogs = await blog.findAll({where:{
+        id: req.params.id
+    }})
+    if(req.file){
+        file = "http://localhost:4000/"+req.file.filename //current image halyo vane
+    }else{
+        file = blogs[0].image //if new image ayenaa vane poilikai hunxa
+    }
     const update1 = await blog.update({
         title:req.body.title,
         description: req.body.description,
-        image: "http://localhost:4000/"+req.file.filename,
+        image: file,      
     },{
        where:{
           id:req.params.id
