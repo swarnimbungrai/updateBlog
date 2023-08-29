@@ -1,10 +1,10 @@
-const express= require ('express') //importing express module(framework)
+const express = require('express') //importing express module(framework)
 const app = express();
+const cors = require("cors")
+const ejs = require("ejs");
+app.set("view engine", "ejs")
 
-const ejs = require ("ejs");
-app.set("view engine", "ejs") 
-    
-const {sequelize, blogTB, blog, users} = require ('./model')
+const { sequelize, blogTB, blog, users } = require('./model')
 
 const bcrypt = require("bcrypt");
 const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd, blogS, blogAll, single, deleteBlog, editBlog, updateBlog, myBlog } = require('./controller/authController');
@@ -12,55 +12,66 @@ const { registerBlog, loginBlog, forgotPassword, otpConfirm, blogAdd, blogS, blo
 //multer, package junle image/file upload grnu dinxa
 const { multer, storage } = require("././service/multerConfig");
 const { isAuthenticated } = require('./services/isAuthenticated');
+const errorHandler = require('./services/errorHandler');
 const upload = multer({ storage: storage });
-
+const whitelistDomain = ["https://www.google.com", "https://expressjs.com","http://localhost:4000"]
+const corsOptions = {
+   origin: function (origin, callback) {
+      if (whitelistDomain.indexOf(origin) !== -1) {
+         callback(null, true)
+      } else {
+         callback(new Error('Not allowed by CORS'))
+      }
+   }
+}
+app.use(cors(corsOptions))
 
 //shows data in terminal which were filled in form
 app.use(express.json())
-app.use(express.urlencoded ({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(require("cookie-parser")());
 
 app.use(express.static("uploads")); //database ko null ko thauma image ko link show grxa
 
-app.get('/home',(req, res) => {
-    res.render('home')
+app.get('/home', (req, res) => {
+   res.render('home')
 });
 
-app.get('/register',(req, res) => { //hernulai UI
-   
-    res.render('register.ejs');
- });
- app.post('/register', registerBlog); //database ma halnu action ma post
- 
+app.get('/register', (req, res) => { //hernulai UI
 
- app.get('/login',(req, res) => {
-   
-    res.render('login.ejs');
- });
- app.post('/login', loginBlog);
+   res.render('register.ejs');
+});
+app.post('/register', registerBlog); //database ma halnu action ma post
 
- app.get('/footer',(req, res) => {
-   
-    res.render('footer');
- });
 
- app.get('/forgotPsw',(req, res) => {
-   
-    res.render('forgotPsw');
- });
+app.get('/login', (req, res) => {
 
- app.post('/forgotPsw', forgotPassword)
+   res.render('login.ejs');
+});
+app.post('/login', loginBlog);
 
- app.get('/confirm',(req, res) => {
+app.get('/footer', (req, res) => {
+
+   res.render('footer');
+});
+
+app.get('/forgotPsw', (req, res) => {
+
+   res.render('forgotPsw');
+});
+
+app.post('/forgotPsw', forgotPassword)
+
+app.get('/confirm', (req, res) => {
    res.render('confirmCode');
 });
-app.post('/confirm',otpConfirm)
+app.post('/confirm', otpConfirm)
 
-app.get('/blog',(req,res) => {
+app.get('/blog', (req, res) => {
    res.render('blog.ejs')
 })
-            //middleware of multer
-app.post('/blog',isAuthenticated, upload.single('image'), blogAdd)
+//middleware of multer
+app.post('/blog', isAuthenticated, upload.single('image'), blogAdd)
 // app.post('/blog', upload.single('image'), blogAdd)
 
 
@@ -75,14 +86,15 @@ app.get('/edit/:id', editBlog);
 
 app.post('/edit/:id', upload.single('image'), updateBlog);
 
-app.get('/myBlogs',isAuthenticated, myBlog);
+app.get('/myBlogs', isAuthenticated, myBlog);
 
-app.get('/logout',(req,res) => {
+app.get('/logout', (req, res) => {
    res.clearCookie()
    res.redirect('/login')
 })
 
+app.use(errorHandler)
 
-app.listen(4000,()=>{
-    console.log("server started at ports 4000")
+app.listen(4000, () => {
+   console.log("server started at ports 4000")
 }); 
